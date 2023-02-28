@@ -73,4 +73,25 @@ SELECT b.userID
 -- 정렬 Order BY
 SELECT *
   FROM usertbl
- WHERE birthYear > 1069; 
+ WHERE birthYear > 1069
+ ORDER BY birthYear ASC, height DESC;
+ 
+-- 중복제거
+SELECT distinct birthYear
+  FROM usertbl;
+  
+-- LIMIT 갯수 제한
+USE homeplus;
+
+SELECT * FROM indexTbl
+LIMIT 5;
+
+USE sqlDB;
+
+-- 조회하면서 새로운 테이블 생성
+CREATE TABLE elec_buytbl_new
+SELECT num
+	 , prodName
+     , price
+  FROM buytbl
+ WHERE groupName = '전자';
