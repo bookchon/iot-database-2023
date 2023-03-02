@@ -90,7 +90,7 @@ USE sqlDB;
 
 -- 조회하면서 새로운 테이블 생성
 CREATE TABLE elec_buytbl_new
-SELECT num
+SELECT numbuytbl
 	 , prodName
      , price
   FROM buytbl
