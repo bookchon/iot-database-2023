@@ -74,11 +74,17 @@ SELECT m.Names AS '이름'
  WHERE r.rentalIdx IS NULL;
  
 -- 
-SELECT b.Author
-	 , b.Division
-     , COUNT(b.Author)
-     , SUM(b.Price)
- FROM bookstbl AS b
-GROUP BY d.Author, b.Division
-HAVING COUNT(b.Author) >= 2
- 
+SELECT bb.Author, -- bb.Division
+	   d.Names AS '장르', bb.출판권수, bb.합계금액
+  FROM (
+		SELECT b.Author
+			 , b.Division
+			 , COUNT(b.Author) AS '출판권수'
+			 , SUM(b.Price) AS '합계금액'
+		 FROM bookstbl AS b
+		GROUP BY b.Author, b.Division
+		HAVING COUNT(b.Author) >= 2
+       ) AS bb
+ INNER JOIN divtbl AS d
+    ON bb.Division = d.Division
+ ORDER BY bb.출판권수 DESC;
